@@ -47,3 +47,8 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+.Rproj.user
+
+# specific files
+vignettes/datasetcoversion.Rmd
+vignettes/getcellxgene.Rmd
