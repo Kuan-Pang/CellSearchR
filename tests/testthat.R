@@ -1,5 +1,5 @@
 library(testthat)
-library(TestingPackage)
+library(CellSearchR)
 
 test_check("CellSearchR")
-
+# [END]

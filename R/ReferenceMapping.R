@@ -8,17 +8,12 @@
 #' @param embedMethod A string of the embedding method,
 #'  which is one of the following:
 #'    - "Seurat": the default embedding method using Seurat
-#'
+#' 
 #' @return predictions of reference mapping
 #' @export
 #'
 #' @examples
-#' # load the query dataset
-#' queryDataset <- InstallData("queryDataset")
-#' # load the reference dataset
-#' referenceDataset <- InstallData("referenceDataset")
-#' # perform reference mapping
-#' predictions <- searchCell(queryDataset, referenceDataset,
+#' predictions <- searchCell(covid.pbmc3k, cellxgene3k,
 #'                            embedMethod = "Seurat")
 #'
 #' @references
@@ -32,7 +27,15 @@
 searchCell <- function(queryDataset,
                        referenceDataset,
                        embedMethod = "Seurat") {
-  # check the embedMethod
+  # check the user input
+  if (class(queryDataset) != "Seurat") {
+    stop("The queryDataset is not a Seurat object.")
+  }
+  if (class(referenceDataset) != "Seurat") {
+    stop("The referenceDataset is not a Seurat object.")
+  }
+  
+  # select the embedding method
   if (embedMethod == "Seurat") {
     predictions <-
       referenceMappingSeurat(queryDataset, referenceDataset)
@@ -48,16 +51,13 @@ searchCell <- function(queryDataset,
 #'
 #' @param queryDataset 
 #' @param referenceDataset 
+#' @import Seurat
 #'
 #' @return predictions of reference mapping
-#' # load the query dataset
-#' queryDataset <- InstallData("queryDataset")
-#' # load the reference dataset
-#' referenceDataset <- InstallData("referenceDataset")
-#' # perform reference mapping
-#' predictions <- referenceMappingSeurat(queryDataset, referenceDataset)
-#'
+#' 
 #' @examples
+#' predictions <- referenceMappingSeurat(covid.covid.pbmc3k, cellxgene3k)
+#'
 referenceMappingSeurat <- function(queryDataset,
                                    referenceDataset) {
   # dataset preprocessing
@@ -78,18 +78,15 @@ referenceMappingSeurat <- function(queryDataset,
   print("Preprocessing the query dataset")
   queryDataset <- NormalizeData(queryDataset)
   print("Running reference mapping")
-  queryAnchers <- FindTransferAnchors(
-    reference = referenceDataset,
-    query = queryDataset,
-    dims = 1:30,
-    reference.reduction = "pca",
-    normalization.method = "SCT"
-  )
+  queryAnchers <- seuratEmbedding(referenceDataset, queryDataset)
   print("Transfer annotation")
   predictions <- TransferData(
     anchorset = queryAnchers,
     refdata = referenceDataset$cell_type,
     dims = 1:30
   )
+  class(predictions) <- "MapResult"
   return(predictions)
 }
+
+# [END]

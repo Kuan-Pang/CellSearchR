@@ -1,0 +1,85 @@
+---
+title: "A tour of CellSearchR"
+author: "Anjali Silva"
+date: "`r format(Sys.time(), '%d %b %Y')`"
+output: 
+  rmarkdown::html_vignette:
+    toc: true
+    number_sections: false
+vignette: >
+  %\VignetteIndexEntry{A tour of CellSearchR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+opts_chunk$set(fig.align = "center", 
+               out.width = "90%",
+               fig.width = 6, fig.height = 5.5,
+               dev.args=list(pointsize=10),
+               par = TRUE, # needed for setting hook 
+               collapse = TRUE, # collapse input & ouput code in chunks
+               warning = FALSE)
+knit_hooks$set(par = function(before, options, envir)
+  { if(before && options$fig.show != "none") 
+       par(family = "sans", mar=c(4.1,4.1,1.1,1.1), mgp=c(3,1,0), tcl=-0.5)
+})
+set.seed(1) # for exact reproducibility
+```
+
+## Introduction
+
+The `CellSearchR` package, developed as part of BCB410: Applied Bioinformatics, designed to enhance the analysis of single-cell RNA-sequencing (scRNA-seq) data. This R package automates the annotation of scRNA-seq data by utilizing the extensive and well-annotated [Cellxgene](https://cellxgene.cziscience.com/) database, which contains over 33 million single-cell entries from various studies, organ systems, and sequencing technologies (CZ Cellxgene, 2023). **This document gives a tour of** `CellSearchR` **(version 0.1.0)**. See `help(package = "CellSearchR")` for further details.
+
+![](cellsearchr.jepg)
+
+<br>
+
+## Search your query cell in the reference dataset
+
+`CellSearchR` includes a sample dataset from Cellxgene database which includes 3K blood cells (Chan Zuckerberg Initiative, 2023). The `searchCell` function allows users to search for their query cell in the reference dataset. The function takes in two arguments: `queryDataset` and `referenceDataset`. The `queryDataset` is the dataset that the user wants to annotate, and the `referenceDataset` is the dataset that the user wants to use as a reference for annotation. The `queryDataset` and `referenceDataset` should be Seurat objects. The function returns a `ResultMap` object with the predicted cell type annotations for the `queryDataset`. While `embedMethod` allows user to select the embedding method, `searchCell` currently supports `Seurat` flavored embeddings for mapping the reference (Hao et al., 2023). 
+
+You may run the following code for more information:
+
+```{r, }
+library(CellSearchR)
+?CellSearchR::searchCell
+```
+
+
+
+As an example, let's use the provided *cellxgene3k* dataset with *covid.pbmc3k* dataset as the query dataset. The *covid.pbmc3k* dataset is from a study that profiled the peripheral blood mononuclear cells (PBMC) from COVID-19 patients (Ballestar et al., 2020). 
+
+
+```{r}
+searchResult <- searchCell(covid.pbmc3k, 
+                           cellxgene3k)
+
+searchResult$predicted.id[1]
+```
+
+
+The research result for the first query cell is  ``naive B cell". Next, we plot the dimensionality reduction(UMAP) figure colored with annotation results:
+
+```{r}
+plotAnnotation(covid.pbmc3k, 
+               searchResult)
+```
+
+We see that we get a fine-grind annotation of the query cells. Here we have finished searching of query cells in the reference dataset and achieved automated annotation of the query cells using the reference dataset.
+
+## Other References
+
+- Chan Zuckerberg Initiative. CZ CELLxGENE Discover. Accessed: insert date here. n.d. url: https://cellxgene.cziscience.com/.
+
+- Yuhan Hao et al. “Integrated analysis of multimodal single-cell data”. In: Cell (2021). doi: 10.1016/j.cell.2021.04.048. url: https://doi.org/10.1016/j.cell.2021. 04.048.
+
+- Ballestar, Esteban, et al. "Single cell profiling of COVID-19 patients: an international data resource from multiple tissues.” medRxiv (2020)." URL https://www. medrxiv. org/content/10.1101/2020.11 20: v1.
+
+- McInnes, Leland, John Healy, and James Melville. "Umap: Uniform manifold approximation and projection for dimension reduction." arXiv preprint arXiv:1802.03426 (2018).
+------------------------------------------------------------------------
+
+```{r}
+sessionInfo()
+```
