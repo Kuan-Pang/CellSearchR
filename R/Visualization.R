@@ -15,7 +15,7 @@
 #' arXiv preprint arXiv:1802.03426 (2018).
 #'
 #' @examples
-#' predictions <- referenceMappingSeurat(covid.pbmc3k, cellxgene3k)
+#' predictions <- searchCell(covid.pbmc3k, cellxgene3k)
 #' plotAnnotation(covid.pbmc3k, predictions)
 #' 
 plotAnnotation <- function(queryDataset, prediction){

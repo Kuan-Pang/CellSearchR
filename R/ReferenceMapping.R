@@ -55,8 +55,6 @@ searchCell <- function(queryDataset,
 #'
 #' @return predictions of reference mapping
 #' 
-#' @examples
-#' predictions <- referenceMappingSeurat(covid.covid.pbmc3k, cellxgene3k)
 #'
 referenceMappingSeurat <- function(queryDataset,
                                    referenceDataset) {
