@@ -19,7 +19,7 @@ A function to plot the annotation of query dataset using UMAP
 dimensionality reduction with Seurat.
 }
 \examples{
-predictions <- referenceMappingSeurat(covid.pbmc3k, cellxgene3k)
+predictions <- searchCell(covid.pbmc3k, cellxgene3k)
 plotAnnotation(covid.pbmc3k, predictions)
 
 }

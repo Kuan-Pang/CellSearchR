@@ -17,7 +17,3 @@ predictions of reference mapping
 \description{
 A function to perform reference mapping with Seurat.
 }
-\examples{
-predictions <- referenceMappingSeurat(covid.covid.pbmc3k, cellxgene3k)
-
-}
