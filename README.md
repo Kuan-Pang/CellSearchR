@@ -30,6 +30,7 @@ The overview pipeline of CellSearchR is shown below:
 `CellSearchR` contains 2 functions:
  - `CellSearchR::searchCell`: This function takes in a query and a reference Seurat object of single cell RNA-seq data, with user specified embedding method. The function then performs reference mapping and returns a list with the query cells annotated with the cell type labels from the reference data.
  - `CellSearchR::plotAnnotation`: Visualize the annotation results from `searchCell()` in a UMAP plot.
+ 
 
 
 `CellSearchR` contains 2 datasets:
