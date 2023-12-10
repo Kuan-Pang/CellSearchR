@@ -1,5 +1,5 @@
 Package: CellSearchR
-Title: Annotation automation of singlecell RNAseq data with reference mapping
+Title: Automated annotation of single cell RNAseq data with reference mapping
 Version: 0.1.1
 Authors@R: 
     person("Kuan", "Pang", , "kuan.pang@mail.utoronto.ca", 

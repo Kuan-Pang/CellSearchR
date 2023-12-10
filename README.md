@@ -1,6 +1,6 @@
 # CellSearchR
 
-![](./assets/cellsearchr.jpeg)
+![](./inst/extdata/cellsearchr.jpeg)
 
 CellSearchR is an R package designed to automate the annotation of single-cell RNA-seq data by leveraging the [Cellxgene](https://chanzuckerberg.github.io/cellxgene-census/) database for reference mapping.
 
@@ -24,7 +24,7 @@ To run the shinyApp: Under construction
 ## Overview
 
 The overview pipeline of CellSearchR is shown below:
-![](./assets/pipeline.jpg)
+![](./inst/extdata/pipeline.jpg)
 
 
 `CellSearchR` contains 2 functions:
