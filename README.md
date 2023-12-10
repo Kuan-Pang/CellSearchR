@@ -59,7 +59,7 @@ The author for the package is Kuan Pang. The author wrote `searchCell` and `plot
 
 - Yuhan Hao et al. “Integrated analysis of multimodal single-cell data”. In: Cell (2021). doi: 10.1016/j.cell.2021.04.048. url: https://doi.org/10.1016/j.cell.2021. 04.048.
 
-- Ballestar, Esteban, et al. "Single cell profiling of COVID-19 patients: an international data resource from multiple tissues.” medRxiv (2020)." URL https://www. medrxiv. org/content/10.1101/2020.11 20: v1.
+- Ballestar, Esteban, et al. "Single cell profiling of COVID-19 patients: an international data resource from multiple tissues.” medRxiv (2020)." URL https://www.medrxiv.org/content/10.1101/2020.11 20: v1.
 
 - McInnes, Leland, John Healy, and James Melville. "Umap: Uniform manifold approximation and projection for dimension reduction." arXiv preprint arXiv:1802.03426 (2018).
 
