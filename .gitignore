@@ -52,3 +52,5 @@ rsconnect/
 # specific files
 vignettes/datasetcoversion.Rmd
 vignettes/getcellxgene.Rmd
+
+experiments/
