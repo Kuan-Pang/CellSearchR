@@ -1,6 +1,6 @@
 ---
 title: "A tour of CellSearchR"
-author: "Anjali Silva"
+author: "Kuan Pang"
 date: "`r format(Sys.time(), '%d %b %Y')`"
 output: 
   rmarkdown::html_vignette:

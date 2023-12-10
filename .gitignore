@@ -54,3 +54,4 @@ vignettes/datasetcoversion.Rmd
 vignettes/getcellxgene.Rmd
 
 experiments/
+inst/doc

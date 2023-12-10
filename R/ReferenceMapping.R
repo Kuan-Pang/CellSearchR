@@ -9,6 +9,7 @@
 #'  which is one of the following:
 #'    - "Seurat": the default embedding method using Seurat
 #' 
+#' @import Seurat
 #' @return predictions of reference mapping
 #' @export
 #'
@@ -55,9 +56,16 @@ searchCell <- function(queryDataset,
 #'
 #' @return predictions of reference mapping
 #' 
-#'
 referenceMappingSeurat <- function(queryDataset,
                                    referenceDataset) {
+  # check the user input
+  if (class(queryDataset) != "Seurat") {
+    stop("The queryDataset is not a Seurat object.")
+  }
+  if (class(referenceDataset) != "Seurat") {
+    stop("The referenceDataset is not a Seurat object.")
+  }
+  
   # dataset preprocessing
   print("Start reference mapping with Seurat")
   print("Preprocessing the reference dataset")
