@@ -18,7 +18,6 @@
 #'
 #' @export
 #' @importFrom shiny runApp
-
 runCellSearchR <- function() {
   appDir <- system.file("shiny-scripts",
                         package = "cellSearchR")
