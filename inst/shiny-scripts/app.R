@@ -82,15 +82,10 @@ ui <- fluidPage(
                            plotOutput("annotationPlot")
                            ),
                   tabPanel("Summary of annotation results",
-                           h3("Instructions: Enter options and click 'Run' at the bottom left side."),
-                           h3("Summary of Information Criteria Values:"),
+                           div("Instructions: Enter options and click 'Run' at the bottom left side."),
                            br(),
-                           h4("Bayesian information criterion (BIC)"),
-                           verbatimTextOutput("textOutBIC"),
-                           h4("Integrated Complete Likelihood (ICL)"),
-                           verbatimTextOutput("textOutICL"),
-                           h4("Akaike Information Criterion (AIC)"),
-                           verbatimTextOutput("textOutAIC")),
+                           dataTableOutput("countTable")
+                  ),
         )
       )
   )
@@ -135,8 +130,10 @@ server <- function(input, output) {
       # render UI with the generated plot
       output$annotationPlot <- renderPlot({plot})
 
-
-      return(plot)
+      # summary statistics
+      data_table <- table(mapping_results$predicted.id)
+      df <- data.frame(data_table)
+      output$countTable <- renderDataTable({df})
     })
   })
 
