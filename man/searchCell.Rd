@@ -9,10 +9,10 @@ searchCell(queryDataset, referenceDataset, embedMethod = "Seurat")
 \arguments{
 \item{queryDataset}{A Seurat object of the query dataset}
 
-\item{referenceDataset}{A Seurat object of the reference dataset;}
+\item{referenceDataset}{A Seurat object of the reference dataset}
 
-\item{embedMethod}{A string of the embedding method,
-which is one of the following:
+\item{embedMethod}{A string of the embedding method which is one
+of the following:
 \itemize{
 \item "Seurat": the default embedding method using Seurat
 }}

@@ -5,11 +5,12 @@
 #'
 #' @param queryDataset A Seurat object of the query dataset
 #' @param referenceDataset A Seurat object of the reference dataset
-#' @param embedMethod A string of the embedding method,
-#'  which is one of the following:
-#'    - "Seurat": the default embedding method using Seurat
-#' @return predictions of reference mapping
+#' @param embedMethod A string of the embedding method which is one
+#' of the following:
+#'  -  "Seurat": the default embedding method using Seurat
 #'
+#'
+#' @return predictions of reference mapping
 #' @import Seurat
 #' @export
 #'
@@ -51,8 +52,8 @@ searchCell <- function(queryDataset,
 #'
 #' A function to perform reference mapping with Seurat.
 #'
-#' @param queryDataset
-#' @param referenceDataset
+#' @param queryDataset query dataset
+#' @param referenceDataset reference dataset
 #' @import Seurat
 #'
 #' @return predictions of reference mapping
