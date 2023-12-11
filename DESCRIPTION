@@ -16,7 +16,9 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Remotes: github::satijalab/seurat-data
 Imports: 
-    Seurat
+    Seurat,
+    shiny,
+    shinyalert
 Suggests: 
     knitr,
     rmarkdown,
@@ -25,3 +27,5 @@ Depends:
     R (>= 2.10)
 LazyData: true
 VignetteBuilder: knitr
+URL: https://github.com/Kuan-Pang/CellSearchR
+BugReports: https://github.com/Kuan-Pang/CellSearchR/issues

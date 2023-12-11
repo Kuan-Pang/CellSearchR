@@ -6,11 +6,6 @@
 \usage{
 referenceMappingSeurat(queryDataset, referenceDataset)
 }
-\arguments{
-\item{queryDataset}{}
-
-\item{referenceDataset}{}
-}
 \value{
 predictions of reference mapping
 }

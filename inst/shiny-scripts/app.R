@@ -14,6 +14,7 @@ ui <- fluidPage(
   # title page
   titlePanel("CellSearchR: automated annotation of single cell RNAseq data
             with reference mapping"),
+
   sidebarLayout(
 
     # Sidebar panel for inputs ----
