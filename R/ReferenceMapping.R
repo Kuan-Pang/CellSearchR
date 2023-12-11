@@ -8,7 +8,7 @@
 #' @param embedMethod A string of the embedding method,
 #'  which is one of the following:
 #'    - "Seurat": the default embedding method using Seurat
-#' 
+#'
 #' @import Seurat
 #' @return predictions of reference mapping
 #' @export
@@ -30,12 +30,13 @@ searchCell <- function(queryDataset,
                        embedMethod = "Seurat") {
   # check the user input
   if (class(queryDataset) != "Seurat") {
+    print(class(queryDataset))
     stop("The queryDataset is not a Seurat object.")
   }
   if (class(referenceDataset) != "Seurat") {
     stop("The referenceDataset is not a Seurat object.")
   }
-  
+
   # select the embedding method
   if (embedMethod == "Seurat") {
     predictions <-
@@ -47,15 +48,15 @@ searchCell <- function(queryDataset,
 }
 
 #' Perform reference mapping with Seurat
-#' 
+#'
 #' A function to perform reference mapping with Seurat.
 #'
-#' @param queryDataset 
-#' @param referenceDataset 
+#' @param queryDataset
+#' @param referenceDataset
 #' @import Seurat
 #'
 #' @return predictions of reference mapping
-#' 
+#'
 referenceMappingSeurat <- function(queryDataset,
                                    referenceDataset) {
   # check the user input
@@ -65,7 +66,7 @@ referenceMappingSeurat <- function(queryDataset,
   if (class(referenceDataset) != "Seurat") {
     stop("The referenceDataset is not a Seurat object.")
   }
-  
+
   # dataset preprocessing
   print("Start reference mapping with Seurat")
   print("Preprocessing the reference dataset")
@@ -75,11 +76,11 @@ referenceMappingSeurat <- function(queryDataset,
   referenceDataset <- RunPCA(referenceDataset)
   referenceDataset <- FindNeighbors(referenceDataset, dims = 1:30)
   referenceDataset <- FindClusters(referenceDataset)
-  
+
   # dataset integration
   print("Integrating the reference dataset")
   referenceDataset <- SCTransform(referenceDataset)
-  
+
   # query dataset
   print("Preprocessing the query dataset")
   queryDataset <- NormalizeData(queryDataset)

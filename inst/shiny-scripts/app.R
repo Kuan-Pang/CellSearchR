@@ -5,7 +5,7 @@ library(shiny)
 library(shinyalert)
 
 # set max file upload limit
-options(shiny.maxRequestSize = 100 * 1024^2)
+options(shiny.maxRequestSize = 10 * 1024^2)
 
 
 # Define UI
@@ -40,6 +40,11 @@ ui <- fluidPage(
       # input
       shinyalert::useShinyalert(force = TRUE),  # Set up shinyalert
 
+      # selectable list for available  cell embedding method
+      selectInput("embed", "Choose your cell embedding method",
+                  list("",
+                       "Seurat")),
+
       # selectable list for available reference dataset
       selectInput("reference", "Choose your reference dataset",
                   list("",
@@ -47,7 +52,8 @@ ui <- fluidPage(
 
       # file input for query dataset
       fileInput("query", "Upload your query dataset: scRNAseq count
-                matrix (.rda format)"),
+                matrix (Seurat object in .rda format)"),
+
       # instruction for demo file download
       tags$div(
         "You may find the demo query dataset at `\\data\\covid.pbmc3k.rda` or
@@ -58,7 +64,6 @@ ui <- fluidPage(
 
       br(),
       br(),
-
 
 
       # actionButton
@@ -72,12 +77,8 @@ ui <- fluidPage(
       # Output: Tabset w/ plot, summary, and table ----
       tabsetPanel(type = "tabs",
                   tabPanel("Plot annotation results",
-                           h3("Instructions: Enter values and click 'Run' at the bottom left side."),
-                           h3("Pairs Plot of Log-transformed RNAseq Count Dataset:"),
+                           div("Instructions: Enter values and click 'Run' at the bottom left side."),
                            br(),
-                           # textOutput("refData"),
-
-
                            plotOutput("RNAseqPlot")),
                   tabPanel("Summary of annotation results",
                            h3("Instructions: Enter values and click 'Run' at the bottom left side."),
@@ -89,46 +90,49 @@ ui <- fluidPage(
                            verbatimTextOutput("textOutICL"),
                            h4("Akaike Information Criterion (AIC)"),
                            verbatimTextOutput("textOutAIC")),
+        )
       )
-
-    )
   )
 )
 
 # Define server logic for random distribution app ----
 server <- function(input, output) {
 
+  # selected embeddings
+  embedMethod <- reactive({
+    data <- switch(input$embed,
+           "Seurat" = "Seurat")
+    return(data)
+  })
+
   # selected reference dataset
   refData <- reactive({
-    switch(input$reference,
+    data <- switch(input$reference,
            "Cellxgene3K" = CellSearchR::Cellxgene3K)
+    return(data)
   })
 
   # upload query dataset
   queryData <- reactive({
     req(input$query)
-    load(input$query$datapath)
+    data <- load(input$query$datapath)
+    return(data)
   })
 
   # run bottom logic
-
-  mappingResults <- eventReactive(eventExpr = input$actionButton, {
-    # CellSearchR::CellSearchR(
-    #   refData = refData(),
-    #   queryData = queryData()
-    # )
-
-    withProgress(message = 'Making plot', value = 0, {
-      # Number of times we'll go through the loop
-        incProgress(0.1, detail = paste("Doing part", "1"))
-        Sys.sleep(1)
-        incProgress(0.5, detail = paste("Doing part", "1"))
-        Sys.sleep(100)
-
-      })
-
+  observeEvent(input$actionButton, {
+    withProgress(message = "Running reference mapping", {
+      mapping_results <- CellSearchR::searchCell(queryData(),
+                                                 refData(),
+                                                 embedMethod())
+      plot <- CellSearchR::plotCellSearchR(mapping_results)
+    })
   })
 
+  # output plot
+  output$RNAseqPlot <- renderPlot({
+    return(plot)
+  })
 
 }
 
