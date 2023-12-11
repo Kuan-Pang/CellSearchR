@@ -78,11 +78,13 @@ ui <- fluidPage(
       tabsetPanel(type = "tabs",
                   tabPanel("Plot annotation results",
                            div("Instructions: Enter options and click 'Run' at the bottom left side."),
+                           div("UMAP for annotated cells in the query datset:"),
                            br(),
                            plotOutput("annotationPlot")
                            ),
                   tabPanel("Summary of annotation results",
                            div("Instructions: Enter options and click 'Run' at the bottom left side."),
+                           div("Summary of the annotated cell type results:"),
                            br(),
                            dataTableOutput("countTable")
                   ),
