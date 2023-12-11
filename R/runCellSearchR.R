@@ -20,7 +20,7 @@
 #' @importFrom shiny runApp
 runCellSearchR <- function() {
   appDir <- system.file("shiny-scripts",
-                        package = "cellSearchR")
+                        package = "CellSearchR")
   actionShiny <- shiny::runApp(appDir, display.mode = "normal")
   return(actionShiny)
 }
