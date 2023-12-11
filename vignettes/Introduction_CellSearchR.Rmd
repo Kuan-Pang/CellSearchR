@@ -1,6 +1,6 @@
 ---
 title: "A tour of CellSearchR"
-author: "Anjali Silva"
+author: "Kuan Pang"
 date: "`r format(Sys.time(), '%d %b %Y')`"
 output: 
   rmarkdown::html_vignette:
@@ -32,7 +32,18 @@ set.seed(1) # for exact reproducibility
 
 The `CellSearchR` package, developed as part of BCB410: Applied Bioinformatics, designed to enhance the analysis of single-cell RNA-sequencing (scRNA-seq) data. This R package automates the annotation of scRNA-seq data by utilizing the extensive and well-annotated [Cellxgene](https://cellxgene.cziscience.com/) database, which contains over 33 million single-cell entries from various studies, organ systems, and sequencing technologies (CZ Cellxgene, 2023). **This document gives a tour of** `CellSearchR` **(version 0.1.0)**. See `help(package = "CellSearchR")` for further details.
 
-![](cellsearchr.jepg)
+<div style="text-align:center"><img src="cellsearchr.jepg" alt="cellsearchr" width="500"/>
+
+<div style="text-align:left">
+
+
+To download the latest version of `CellSearchR`, please run the following code in R:
+
+```{r, }
+require("devtools")
+devtools::install_github("Kuan-Pang/CellSearchR", build_vignettes = TRUE)
+library("CellSearchR")
+```
 
 <br>
 

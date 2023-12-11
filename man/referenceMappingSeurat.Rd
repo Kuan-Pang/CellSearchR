@@ -7,9 +7,9 @@
 referenceMappingSeurat(queryDataset, referenceDataset)
 }
 \arguments{
-\item{queryDataset}{}
+\item{queryDataset}{query dataset}
 
-\item{referenceDataset}{}
+\item{referenceDataset}{reference dataset}
 }
 \value{
 predictions of reference mapping

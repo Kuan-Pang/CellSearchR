@@ -1,0 +1,13 @@
+citHeader("To cite TestingPackage in publications use:")
+
+citEntry(entry = "Unpublished",
+  title        = "CellSearchR: automated annotation of single cell RNAseq data 
+                  with reference mapping",
+  author       = "Kuan Pang",
+  note         = "Unpublished",
+  year         = "2023",
+
+  textVersion  =
+  paste("Pang, K. (2023) CellSearchR: automated annotation of single cell RNAseq data 
+  with reference mapping. URL https://github.com/Kuan-Pang/CellSearchR.")
+)
