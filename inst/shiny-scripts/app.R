@@ -52,7 +52,7 @@ ui <- fluidPage(
 
       # file input for query dataset
       fileInput("query", "Upload your query dataset: scRNAseq count
-                matrix (Seurat object in .rda format)"),
+                matrix (Seurat object in .rda format)",  accept=(".rda")),
 
       # instruction for demo file download
       tags$div(
@@ -77,11 +77,12 @@ ui <- fluidPage(
       # Output: Tabset w/ plot, summary, and table ----
       tabsetPanel(type = "tabs",
                   tabPanel("Plot annotation results",
-                           div("Instructions: Enter values and click 'Run' at the bottom left side."),
+                           div("Instructions: Enter options and click 'Run' at the bottom left side."),
                            br(),
-                           plotOutput("RNAseqPlot")),
+                           plotOutput("annotationPlot")
+                           ),
                   tabPanel("Summary of annotation results",
-                           h3("Instructions: Enter values and click 'Run' at the bottom left side."),
+                           h3("Instructions: Enter options and click 'Run' at the bottom left side."),
                            h3("Summary of Information Criteria Values:"),
                            br(),
                            h4("Bayesian information criterion (BIC)"),
@@ -108,7 +109,7 @@ server <- function(input, output) {
   # selected reference dataset
   refData <- reactive({
     data <- switch(input$reference,
-           "Cellxgene3K" = CellSearchR::Cellxgene3K)
+           "Cellxgene3K" = CellSearchR::cellxgene3k)
     return(data)
   })
 
@@ -116,23 +117,30 @@ server <- function(input, output) {
   queryData <- reactive({
     req(input$query)
     data <- load(input$query$datapath)
-    return(data)
+    return(CellSearchR::covid.pbmc3k)
   })
 
   # run bottom logic
   observeEvent(input$actionButton, {
     withProgress(message = "Running reference mapping", {
+      # reference mapping
       mapping_results <- CellSearchR::searchCell(queryData(),
                                                  refData(),
                                                  embedMethod())
-      plot <- CellSearchR::plotCellSearchR(mapping_results)
+
+      # make the annotation plot
+      plot <- CellSearchR::plotAnnotation(queryData(),
+                                          mapping_results)
+
+      # render UI with the generated plot
+      output$annotationPlot <- renderPlot({plot})
+
+
+      return(plot)
     })
   })
 
-  # output plot
-  output$RNAseqPlot <- renderPlot({
-    return(plot)
-  })
+
 
 }
 
