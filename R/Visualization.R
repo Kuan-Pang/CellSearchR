@@ -7,6 +7,7 @@
 #' @param prediction reference mapping result
 #'
 #' @return a figure of annotation
+#' @import Seurat
 #' @export
 #'
 #' @references McInnes, Leland,
@@ -46,6 +47,7 @@ plotAnnotation <- function(queryDataset, prediction){
           label = TRUE,
           label.size = 3,
           repel = TRUE) + NoLegend()
+
   return(plot)
 }
 

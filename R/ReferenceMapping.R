@@ -4,13 +4,13 @@
 #' the reference dataset with specified embedding method.
 #'
 #' @param queryDataset A Seurat object of the query dataset
-#' @param referenceDataset A Seurat object of the reference dataset;
+#' @param referenceDataset A Seurat object of the reference dataset
 #' @param embedMethod A string of the embedding method,
 #'  which is one of the following:
 #'    - "Seurat": the default embedding method using Seurat
+#' @return predictions of reference mapping
 #'
 #' @import Seurat
-#' @return predictions of reference mapping
 #' @export
 #'
 #' @examples
