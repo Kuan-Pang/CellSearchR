@@ -19,7 +19,11 @@ devtools::install_github("Kuan-Pang/CellSearchR", build_vignettes = TRUE)
 library("CellSearchR")
 ```
 
-To run the shinyApp: Under construction
+To run the shinyApp: 
+
+```r    
+runCellSearchR()
+```
 
 ## Overview
 
@@ -47,6 +51,10 @@ ls("package:CellSearchR")
 data(package = "CellSearchR") 
 browseVignettes("CellSearchR")
 ```
+
+CellSearchR also comes with a shiny app allowing user to interactively perform reference mapping and cell annotation. Here is an example of the shiny app:
+
+![](./inst/extdata/shinyapp.jpg)
 
 
 ## Contribution

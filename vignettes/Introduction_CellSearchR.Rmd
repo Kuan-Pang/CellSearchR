@@ -34,6 +34,15 @@ The `CellSearchR` package, developed as part of BCB410: Applied Bioinformatics, 
 
 ![](cellsearchr.jepg)
 
+
+To download the latest version of `CellSearchR`, please run the following code in R:
+
+```{r, }
+require("devtools")
+devtools::install_github("Kuan-Pang/CellSearchR", build_vignettes = TRUE)
+library("CellSearchR")
+```
+
 <br>
 
 ## Search your query cell in the reference dataset
